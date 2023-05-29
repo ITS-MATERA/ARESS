@@ -172,7 +172,7 @@ function intervalloTg(riferimenti) {
 }
 
 function rischioRelativo(riferimenti,data) {
-  let tassi =tassoStandard(calcoloWi(estraiTotale("peso_classe",riferimenti,data),riferimenti),riferimenti,data, 1);
+  let tassi =tassoStandard(calcoloWi(estraiTotale("peso_classe",riferimenti,data),riferimenti,data),riferimenti,data, 1);
   let puglia = tassi["Puglia"]["tasso"];
   let container = {};
   riferimenti.forEach((el) => {
