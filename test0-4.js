@@ -146,7 +146,7 @@ function tassoGrezzo(casi, popolazione,riferimenti,data, k = 1000) {
   );
 }
 
-function intervalloTg(riferimenti) {
+function intervalloTg(riferimenti,data) {
   let tassi = tassoGrezzo(estraiTotale("casi",riferimenti,data), estraiTotale("popolazione",riferimenti,data),riferimenti,data, 1);
   let popolazione = estraiTotale("popolazione",riferimenti,data);
   let sqrt = 0;
