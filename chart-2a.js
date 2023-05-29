@@ -98,8 +98,8 @@ function calcoloEsLogTs(wi, tassoStandard,data,riferimenti) {
 }
 
 function intervalloTs(riferimenti,data) {
-  let tassi = tassoStandard(calcoloWi(estraiTotale("peso_classe",riferimenti,data),riferimenti),riferimenti,data, 1);
-  let esLog = calcoloEsLogTs(calcoloWi(estraiTotale("peso_classe",riferimenti,data),riferimenti), tassi,data,riferimenti);
+  let tassi = tassoStandard(calcoloWi(estraiTotale("peso_classe",riferimenti,data),riferimenti,data),riferimenti,data, 1);
+  let esLog = calcoloEsLogTs(calcoloWi(estraiTotale("peso_classe",riferimenti,data),riferimenti,data), tassi,data,riferimenti);
   let container = {};
   let valore = 0;
   let obj = {};
@@ -182,11 +182,11 @@ function rischioRelativo(riferimenti,data) {
 }
 
 function intervalloRr(riferimenti,data) {
-  let tassi = tassoStandard(calcoloWi(estraiTotale("peso_classe",riferimenti,data),riferimenti),riferimenti,data, 1);
+  let tassi = tassoStandard(calcoloWi(estraiTotale("peso_classe",riferimenti,data),riferimenti,data),riferimenti,data, 1);
   let rr = rischioRelativo(riferimenti,data);
   let puglia = tassi["Puglia"]["tasso"];
   let container = {};
-  let esLog = calcoloEsLogTs(calcoloWi(estraiTotale("peso_classe",riferimenti,data),riferimenti), tassi,data,riferimenti);
+  let esLog = calcoloEsLogTs(calcoloWi(estraiTotale("peso_classe",riferimenti,data),riferimenti,data), tassi,data,riferimenti);
   let esRr = 0;
   let obj = {};
   riferimenti.forEach((el) => {
