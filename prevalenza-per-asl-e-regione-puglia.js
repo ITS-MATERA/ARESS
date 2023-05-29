@@ -1,9 +1,9 @@
-const estraiRiferimenti = (tipo) => {
+const estraiRiferimenti = (tipo,data) => {
   var dataset = data.filter((d) => d.tipo_riferimento === tipo);
   return estraiFiltro("riferimento", dataset);
 };
 
-const estraiFiltro = (column) => {
+const estraiFiltro = (column,data) => {
   return data.reduce(
     (values, row) =>
       values.indexOf(row[column]) === -1
@@ -13,7 +13,7 @@ const estraiFiltro = (column) => {
   );
 };
 
-function estraiTotale(colonna) {
+function estraiTotale(colonna,riferimeti) {
   return riferimenti.reduce(
     (obj, riferimento) => ({
       ...obj,
@@ -25,7 +25,7 @@ function estraiTotale(colonna) {
   );
 }
 
-function calcoloWi(TotalePesoClasse) {
+function calcoloWi(TotalePesoClasse,riferimenti) {
   return riferimenti.reduce(
     (obj, riferimento) => ({
       ...obj,
@@ -44,7 +44,7 @@ function calcoloWi(TotalePesoClasse) {
   );
 }
 
-function divTassoStandard(wi, riferimento) {
+function divTassoStandard(wi, riferimento,data) {
   return (
     data
       .filter((d) => d.riferimento === riferimento)
@@ -61,7 +61,7 @@ function divTassoStandard(wi, riferimento) {
   );
 }
 
-function tassoStandard(wi, k = 1000) {
+function tassoStandard(wi,riferimenti,k = 1000) {
   return riferimenti.reduce(
     (obj, riferimento) => ({
       ...obj,
@@ -76,7 +76,7 @@ function tassoStandard(wi, k = 1000) {
   );
 }
 
-function tassoGrezzo(casi, popolazione, k = 1000) {
+function tassoGrezzo(casi, popolazione,riferimenti, k = 1000) {
   return riferimenti.reduce(
     (obj, riferimento) => ({
       ...obj,
@@ -99,7 +99,7 @@ function tassoGrezzo(casi, popolazione, k = 1000) {
   );
 }
 
-function intervalloTg() {
+function intervalloTg(riferimenti) {
   let tassi = tassoGrezzo(estraiTotale("casi"), estraiTotale("popolazione"), 1);
   let popolazione = estraiTotale("popolazione");
   let sqrt = 0;
@@ -124,7 +124,7 @@ function intervalloTg() {
   return container;
 }
 
-function calcoloEsLogTs(wi, tassoStandard) {
+function calcoloEsLogTs(wi, tassoStandard,data) {
   return riferimenti.reduce(
     (obj, riferimento) => ({
       ...obj,
@@ -145,7 +145,7 @@ function calcoloEsLogTs(wi, tassoStandard) {
   );
 }
 
-function intervalloTs() {
+function intervalloTs(riferimenti) {
   let tassi = tassoStandard(calcoloWi(estraiTotale("peso_classe")), 1);
   let esLog = calcoloEsLogTs(calcoloWi(estraiTotale("peso_classe")), tassi);
   let container = {};
@@ -170,7 +170,7 @@ function intervalloTs() {
   return container;
 }
 
-function rischioRelativo() {
+function rischioRelativo(riferimenti) {
   let tassi = tassoStandard(calcoloWi(estraiTotale("popolazione")), 1);
   let puglia = tassi["Puglia"]["tasso"];
   let container = {};
@@ -180,7 +180,7 @@ function rischioRelativo() {
   return container;
 }
 
-function intervalloRr() {
+function intervalloRr(riferimenti) {
   let tassi = tassoStandard(calcoloWi(estraiTotale("peso_classe")), 1);
   let rr = rischioRelativo();
   let puglia = tassi["Puglia"]["tasso"];
@@ -194,7 +194,6 @@ function intervalloRr() {
       lcl: 0,
       ucl: 0,
     };
-
     esRr = Math.sqrt(Math.pow(esLog[el], 2) + Math.pow(esLog["Puglia"], 2));
     obj.tasso = rr[el];
     obj.lcl = +Math.exp(Math.log(rr[el]) - 1.96 * esRr).toFixed(4);
