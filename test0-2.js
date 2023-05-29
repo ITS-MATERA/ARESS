@@ -13,7 +13,7 @@ const estraiFiltro = (column,data) => {
   );
 };
 
-function estraiTotale(colonna,riferimenti) {
+function estraiTotale(colonna,riferimenti,data) {
   return riferimenti.reduce(
     (obj, riferimento) => ({
       ...obj,
