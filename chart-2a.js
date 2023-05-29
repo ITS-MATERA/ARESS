@@ -26,7 +26,7 @@ function estraiTotale(colonna,riferimenti,data) {
   );
 }
 
-function calcoloWi(TotalePesoClasse,riferimenti) {
+function calcoloWi(TotalePesoClasse,riferimenti,data) {
   return riferimenti.reduce(
     (obj, riferimento) => ({
       ...obj,
