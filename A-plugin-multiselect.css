@@ -168,6 +168,7 @@
   }
   .input-group > .multiselect-native-select > div.btn-group {
     width: 100%;
+    margin-rigth: 0.25rem;
   }
   .input-group > .multiselect-native-select:not(:first-child) .multiselect {
     border-top-left-radius: 0;
